@@ -16,8 +16,8 @@ function addPlayer(name) {
 
 function updateScoreboard(player1, player2) {
 
-    document.querySelector("#player1 h2").textContent = player1.name;
-    document.querySelector("#player2 h2").textContent = player2.name;
+    document.querySelector("#player1 h2").textContent = player1.name + ":";
+    document.querySelector("#player2 h2").textContent = player2.name + ":";
     document.querySelector("#player1Points").textContent = player1.points;
     document.querySelector("#player2Points").textContent = player2.points;
     document.querySelector("#player1Legs").textContent = player1.legsWon;
@@ -35,4 +35,5 @@ function startGame() {
     updateScoreboard(player1, player2);
 
 }
+
 
