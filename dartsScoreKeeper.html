@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darts Score Keeper</title>
+</head>
+<body>
+    
+    <h1>Darts Score Keeper</h1>
+
+    <label for="player1Name">Player 1:</label>
+    <input id="player1Name" type="text">
+
+    <label for="player2Name">Player 2:</label>
+    <input id="player2Name" type="text">
+
+    <label for="gameType">Select game type:</label>
+    <select id="gameType">
+        <option value="301">301</option>
+        <option value="501" selected>501</option>
+    </select>
+
+    <button id="startButton">Start game</button>
+
+
+    <div id="scoreboard">
+        <div id="player1">
+            <h2>Player 1</h2>
+            <p>Points: <span id="player1Points">0</span></p>
+            <p>Legs won: <span id="player1Legs">0</span></p>
+        </div>
+        <div id="player2">
+            <h2>Player 2</h2>
+            <p>Points: <span id="player2Points">0</span></p>
+            <p>Legs won: <span id="player2Legs">0</span></p>
+        </div>
+    </div>
+
+
+
+    <script src="main.js"></script>
+
+</body>
+</html>
