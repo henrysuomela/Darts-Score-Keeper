@@ -22,6 +22,8 @@ function updateScoreboard(player1, player2) {
 
 }
 
+let winningLegs;
+
 function startGame() {
 
     const player1Name = document.getElementById("player1Name").value;
@@ -39,11 +41,10 @@ function startGame() {
     else {
         possibleErrorMessage.textContent = "";
     }
-    let winningLegs = setSize / 2 + 0.5;
+    winningLegs = setSize / 2 + 0.5;
 
     const gameType = parseInt(document.getElementById("gameType").value);
     player1.points = player2.points = gameType;
     updateScoreboard(player1, player2);
 
 }
-
