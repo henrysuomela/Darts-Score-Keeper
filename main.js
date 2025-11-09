@@ -1,7 +1,4 @@
-const player1Name = document.getElementById("player1Name").value;
-const player2Name = document.getElementById("player2Name").value;
 const startButton = document.getElementById("startButton");
-
 startButton.addEventListener("click", startGame);
 
 function addPlayer(name) {
@@ -27,13 +24,26 @@ function updateScoreboard(player1, player2) {
 
 function startGame() {
 
-    const player1 = addPlayer(player1Name || "Player 1");
-    const player2 = addPlayer(player2Name || "Player 2");
+    const player1Name = document.getElementById("player1Name").value;
+    const player2Name = document.getElementById("player2Name").value;
+
+    let player1 = addPlayer(player1Name || "Player 1");
+    let player2 = addPlayer(player2Name || "Player 2");
+
+    let setSize = parseInt(document.getElementById("setSize").value);
+    let possibleErrorMessage = document.getElementById("possibleErrorMessage")
+    if (setSize % 2 === 0 || isNaN(setSize)) {
+        possibleErrorMessage.textContent = "Set size must be an odd number.";
+        return
+    }
+    else {
+        possibleErrorMessage.textContent = "";
+    }
+    let winningLegs = setSize / 2 + 0.5;
 
     const gameType = parseInt(document.getElementById("gameType").value);
     player1.points = player2.points = gameType;
     updateScoreboard(player1, player2);
 
 }
-
 
