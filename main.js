@@ -22,6 +22,7 @@ function updateScoreboard(player1, player2) {
 
 }
 
+let player1, player2;
 let winningLegs;
 
 function startGame() {
@@ -29,19 +30,20 @@ function startGame() {
     const player1Name = document.getElementById("player1Name").value;
     const player2Name = document.getElementById("player2Name").value;
 
-    let player1 = addPlayer(player1Name || "Player 1");
-    let player2 = addPlayer(player2Name || "Player 2");
+    player1 = addPlayer(player1Name || "Player 1");
+    player2 = addPlayer(player2Name || "Player 2");
 
-    let setSize = parseInt(document.getElementById("setSize").value);
-    let possibleErrorMessage = document.getElementById("possibleErrorMessage")
+    const setSize = parseInt(document.getElementById("setSize").value);
+    const possibleErrorMessage = document.getElementById("possibleErrorMessage");
     if (setSize % 2 === 0 || isNaN(setSize)) {
         possibleErrorMessage.textContent = "Set size must be an odd number.";
         return
     }
     else {
         possibleErrorMessage.textContent = "";
+        winningLegs = setSize / 2 + 0.5;
+        document.getElementById("winningLegsMessage").textContent = "Legs required to win: " + winningLegs;
     }
-    winningLegs = setSize / 2 + 0.5;
 
     const gameType = parseInt(document.getElementById("gameType").value);
     player1.points = player2.points = gameType;
