@@ -1,6 +1,9 @@
 const startButton = document.getElementById("startButton");
 startButton.addEventListener("click", startGame);
 
+const throwDartButton = document.getElementById("throwDartButton");
+throwDartButton.addEventListener("click", throwDart)
+
 function addPlayer(name) {
 
     return {
@@ -24,6 +27,9 @@ function updateScoreboard(player1, player2) {
 
 let player1, player2;
 let winningLegs;
+let currentPlayer;
+let throwsThisTurn;
+const gameType = parseInt(document.getElementById("gameType").value);
 
 function startGame() {
 
@@ -34,19 +40,79 @@ function startGame() {
     player2 = addPlayer(player2Name || "Player 2");
 
     const setSize = parseInt(document.getElementById("setSize").value);
-    const possibleErrorMessage = document.getElementById("possibleErrorMessage");
+    const setSizeErrorMessage = document.getElementById("setSizeErrorMessage");
     if (setSize % 2 === 0 || isNaN(setSize)) {
-        possibleErrorMessage.textContent = "Set size must be an odd number.";
+        setSizeErrorMessage.textContent = "Set size must be an odd number.";
         return
     }
     else {
-        possibleErrorMessage.textContent = "";
+        setSizeErrorMessage.textContent = "";
         winningLegs = setSize / 2 + 0.5;
         document.getElementById("winningLegsMessage").textContent = "Legs required to win: " + winningLegs;
     }
 
-    const gameType = parseInt(document.getElementById("gameType").value);
     player1.points = player2.points = gameType;
     updateScoreboard(player1, player2);
+
+    currentPlayer = player1;
+    throwsThisTurn = 0;
+    document.getElementById("turnMessage").textContent = "Current turn: " + currentPlayer.name;
+
+}
+
+
+const scoreForThrowMessage = document.getElementById("scoreForThrowMessage");
+const gameOverMessage = document.getElementById("gameOverMessage");
+const legOverMessage = document.getElementById("legOverMessage");
+const turnMessage = document.getElementById("turnMessage");
+
+function throwDart() {
+
+    if (legOverMessage.textContent) {
+        legOverMessage.textContent = "";
+    }
+
+    const possiblePoints = [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+        11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+        22, 24, 25, 26, 27, 28, 30, 32, 33, 34, 35, 36, 38, 39, 40,
+        42, 45, 48, 50, 51, 54, 57, 60
+    ];
+
+    const points = possiblePoints[Math.floor(Math.random() * possiblePoints.length)];
+    currentPlayer.points -= points;
+    scoreForThrowMessage.textContent = currentPlayer.name + " scores " + points;
+
+    if (currentPlayer.points <= 0) {
+        currentPlayer.points = 0;
+        currentPlayer.legsWon += 1;
+        updateScoreboard(player1, player2);
+
+        if (currentPlayer.legsWon === winningLegs) {
+            gameOverMessage.textContent = currentPlayer.name + " wins the game!";
+            throwDartButton.disabled = true;
+            return;
+        }
+        else {
+            player1.points = player2.points = gameType;
+            legOverMessage.textContent = currentPlayer.name + " wins this leg!";
+            throwsThisTurn = 0;
+
+            currentPlayer = (currentPlayer === player1) ? player2 : player1;
+            turnMessage.textContent = "Current turn: " + currentPlayer.name;
+            updateScoreboard(player1, player2);
+            return;
+        }
+    }
+
+    updateScoreboard(player1, player2);
+
+    throwsThisTurn += 1;
+
+    if (throwsThisTurn === 3) {
+        throwsThisTurn = 0;
+        currentPlayer = (currentPlayer === player1) ? player2 : player1;
+        turnMessage.textContent = "Current turn: " + currentPlayer.name;
+    }
 
 }
