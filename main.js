@@ -2,7 +2,7 @@ const startButton = document.getElementById("startButton");
 startButton.addEventListener("click", startGame);
 
 const submitScoreButton = document.getElementById("submitScoreButton");
-submitScoreButton.addEventListener("click", throwDart)
+submitScoreButton.addEventListener("click", throwDart);
 
 submitScoreButton.disabled = true;
 
@@ -54,10 +54,10 @@ function startGame() {
 
     const setSize = parseInt(document.getElementById("setSize").value);
     const setSizeErrorMessage = document.getElementById("setSizeErrorMessage");
-    const winningLegsMessage = document.getElementById("winningLegsMessage")
+    const winningLegsMessage = document.getElementById("winningLegsMessage");
     if (setSize % 2 === 0 || isNaN(setSize)) {
         setSizeErrorMessage.textContent = "Set size must be an odd number.";
-        return
+        return;
     }
     else {
         setSizeErrorMessage.textContent = "";
