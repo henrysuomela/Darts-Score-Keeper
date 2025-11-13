@@ -32,6 +32,7 @@ let winningLegs;
 let currentPlayer;
 let throwsThisTurn;
 let gameType;
+let scoreBeforeThisTurn;
 
 const turnMessage = document.getElementById("turnMessage");
 const scoreForThrowMessage = document.getElementById("scoreForThrowMessage");
@@ -108,12 +109,26 @@ function throwDart() {
         scoreErrorMsg.textContent = "";
     }
 
+    if (throwsThisTurn === 0) {
+        scoreBeforeThisTurn = currentPlayer.points;
+    }
     
     currentPlayer.points -= points;
+
+    if (currentPlayer.points < 0 || currentPlayer.points === 1) {
+        currentPlayer.points = scoreBeforeThisTurn;
+        scoreForThrowMessage.textContent = currentPlayer.name + " busts, score reverts to " + scoreBeforeThisTurn + " and turn ends.";
+        updateScoreboard(player1, player2);
+
+        throwsThisTurn = 0;
+        currentPlayer = (currentPlayer === player1) ? player2 : player1;
+        turnMessage.textContent = "Current turn: " + currentPlayer.name + ", throws: " + throwsThisTurn;
+        return;
+    }
+
     scoreForThrowMessage.textContent = currentPlayer.name + " scores " + points;
 
-    if (currentPlayer.points <= 0) {
-        currentPlayer.points = 0;
+    if (currentPlayer.points === 0) {
         currentPlayer.legsWon += 1;
         updateScoreboard(player1, player2);
 
