@@ -1,8 +1,10 @@
 const startButton = document.getElementById("startButton");
 startButton.addEventListener("click", startGame);
 
-const throwDartButton = document.getElementById("throwDartButton");
-throwDartButton.addEventListener("click", throwDart)
+const submitScoreButton = document.getElementById("submitScoreButton");
+submitScoreButton.addEventListener("click", throwDart)
+
+submitScoreButton.disabled = true;
 
 function addPlayer(name) {
 
@@ -29,9 +31,17 @@ let player1, player2;
 let winningLegs;
 let currentPlayer;
 let throwsThisTurn;
-const gameType = parseInt(document.getElementById("gameType").value);
+let gameType;
+
+const turnMessage = document.getElementById("turnMessage");
+const scoreForThrowMessage = document.getElementById("scoreForThrowMessage");
+const gameOverMessage = document.getElementById("gameOverMessage");
+const legOverMessage = document.getElementById("legOverMessage");
+
 
 function startGame() {
+
+    scoreForThrowMessage.textContent = gameOverMessage.textContent = legOverMessage.textContent = "";
 
     const player1Name = document.getElementById("player1Name").value;
     const player2Name = document.getElementById("player2Name").value;
@@ -39,8 +49,11 @@ function startGame() {
     player1 = addPlayer(player1Name || "Player 1");
     player2 = addPlayer(player2Name || "Player 2");
 
+    gameType = parseInt(document.getElementById("gameType").value);
+
     const setSize = parseInt(document.getElementById("setSize").value);
     const setSizeErrorMessage = document.getElementById("setSizeErrorMessage");
+    const winningLegsMessage = document.getElementById("winningLegsMessage")
     if (setSize % 2 === 0 || isNaN(setSize)) {
         setSizeErrorMessage.textContent = "Set size must be an odd number.";
         return
@@ -48,7 +61,7 @@ function startGame() {
     else {
         setSizeErrorMessage.textContent = "";
         winningLegs = setSize / 2 + 0.5;
-        document.getElementById("winningLegsMessage").textContent = "Legs required to win: " + winningLegs;
+        winningLegsMessage.textContent = "Legs required to win: " + winningLegs;
     }
 
     player1.points = player2.points = gameType;
@@ -56,17 +69,18 @@ function startGame() {
 
     currentPlayer = player1;
     throwsThisTurn = 0;
-    document.getElementById("turnMessage").textContent = "Current turn: " + currentPlayer.name;
+    turnMessage.textContent = "Current turn: " + currentPlayer.name + ", throws: " + throwsThisTurn;
+
+    submitScoreButton.disabled = false;
 
 }
 
 
-const scoreForThrowMessage = document.getElementById("scoreForThrowMessage");
-const gameOverMessage = document.getElementById("gameOverMessage");
-const legOverMessage = document.getElementById("legOverMessage");
-const turnMessage = document.getElementById("turnMessage");
+
 
 function throwDart() {
+
+    const scoreErrorMsg = document.getElementById("scoreInputErrorMessage")
 
     if (legOverMessage.textContent) {
         legOverMessage.textContent = "";
@@ -79,7 +93,22 @@ function throwDart() {
         42, 45, 48, 50, 51, 54, 57, 60
     ];
 
-    const points = possiblePoints[Math.floor(Math.random() * possiblePoints.length)];
+    const points = parseInt(document.getElementById("scoreInput").value);
+    if (isNaN(points)) {
+        scoreErrorMsg.textContent = "Enter a number.";
+        scoreForThrowMessage.textContent = "";
+        return;
+    }
+    else if (!possiblePoints.includes(points)) {
+        scoreErrorMsg.textContent = points + " isn't a valid score for a throw.";
+        scoreForThrowMessage.textContent = "";
+        return;
+    }
+    else {
+        scoreErrorMsg.textContent = "";
+    }
+
+    
     currentPlayer.points -= points;
     scoreForThrowMessage.textContent = currentPlayer.name + " scores " + points;
 
@@ -89,8 +118,8 @@ function throwDart() {
         updateScoreboard(player1, player2);
 
         if (currentPlayer.legsWon === winningLegs) {
-            gameOverMessage.textContent = currentPlayer.name + " wins the game!";
-            throwDartButton.disabled = true;
+            gameOverMessage.textContent = currentPlayer.name + " wins the game with " + currentPlayer.legsWon + " leg wins!";
+            submitScoreButton.disabled = true;
             return;
         }
         else {
@@ -99,7 +128,7 @@ function throwDart() {
             throwsThisTurn = 0;
 
             currentPlayer = (currentPlayer === player1) ? player2 : player1;
-            turnMessage.textContent = "Current turn: " + currentPlayer.name;
+            turnMessage.textContent = "Current turn: " + currentPlayer.name + ", throws: " + throwsThisTurn;
             updateScoreboard(player1, player2);
             return;
         }
@@ -108,11 +137,13 @@ function throwDart() {
     updateScoreboard(player1, player2);
 
     throwsThisTurn += 1;
+    turnMessage.textContent = "Current turn: " + currentPlayer.name  + ", throws: " + throwsThisTurn;
 
     if (throwsThisTurn === 3) {
         throwsThisTurn = 0;
         currentPlayer = (currentPlayer === player1) ? player2 : player1;
-        turnMessage.textContent = "Current turn: " + currentPlayer.name;
+        turnMessage.textContent = "Current turn: " + currentPlayer.name  + ", throws: " + throwsThisTurn;
     }
+
 
 }
