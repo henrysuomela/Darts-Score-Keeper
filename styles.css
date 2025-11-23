@@ -1,18 +1,125 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Darts Score Keeper</title>
-    <style>
-        body {
-            background-color: blue; /* sininen tausta */
-            color: white;           /* valkoinen teksti */
-        }
-    </style>
-</head>
-<body>
-    <h1>Darts Score Keeper</h1>
-    <p>Tämä toimii heti!</p>
-</body>
-</html>
+body {
+    font-family: Arial, sans-serif;
+    background: #0b0b0b;
+    color: #e6e6e6;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #00ff66;
+    text-shadow: 0 0 10px #00ff66;
+    margin-bottom: 30px;
+}
+
+label {
+    font-weight: bold;
+    margin-right: 6px;
+}
+
+input, select {
+    padding: 7px 10px;
+    background: #1c1c1c;
+    border: 1px solid #333;
+    border-radius: 5px;
+    color: #e6e6e6;
+    margin-right: 10px;
+}
+
+input:focus, select:focus {
+    border-color: #00ff66;
+    outline: none;
+    box-shadow: 0 0 6px #00ff66;
+}
+
+button {
+    padding: 8px 15px;
+    background: #009944;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #fff;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #00cc55;
+    box-shadow: 0 0 10px #00ff66;
+}
+
+#scoreboard {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+#player1, #player2 {
+    background: #111;
+    border: 1px solid #222;
+    padding: 15px 20px;
+    width: 260px;
+    border-radius: 10px;
+    margin: 15px;
+    box-shadow: 0 0 10px rgba(0,255,100,0.2);
+}
+
+#player1 h2, #player2 h2 {
+    text-align: center;
+    color: #00ff66;
+    margin-bottom: 10px;
+}
+
+#player1Points, #player2Points,
+#player1Legs, #player2Legs {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#winningLegsMessage {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 18px;
+    color: #88ff88;
+    font-weight: bold;
+}
+
+#scoreInput {
+    margin-top: 20px;
+    width: 170px;
+}
+
+#submitScoreButton {
+    margin-left: 10px;
+}
+
+#turnMessage,
+#scoreForThrowMessage,
+#legOverMessage,
+#gameOverMessage,
+#setSizeErrorMessage,
+#scoreInputErrorMessage {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+#scoreForThrowMessage {
+    color: #55ff88;
+}
+
+#legOverMessage {
+    color: #00ffaa;
+}
+
+#gameOverMessage {
+    color: #ff4444;
+    text-shadow: 0 0 8px red;
+}
+
+#setSizeErrorMessage,
+#scoreInputErrorMessage {
+    color: #ff5555;
+}
