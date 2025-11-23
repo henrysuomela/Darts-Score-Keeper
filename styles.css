@@ -1,4 +1,18 @@
-body {
-    background-color: blue; /* sininen tausta */
-    color: white;           /* valkoinen teksti */
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darts Score Keeper</title>
+    <style>
+        body {
+            background-color: blue; /* sininen tausta */
+            color: white;           /* valkoinen teksti */
+        }
+    </style>
+</head>
+<body>
+    <h1>Darts Score Keeper</h1>
+    <p>Tämä toimii heti!</p>
+</body>
+</html>
