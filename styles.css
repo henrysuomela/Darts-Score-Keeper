@@ -97,6 +97,11 @@ font-weight: bold;
 text-shadow: 0 0 6px #88ff88;
 }
 
+#winningLegsMessageContainer {
+    display: flex;
+    align-items: center;
+}
+
 #scoreInput {
 margin-top: 20px;
 width: 170px;
