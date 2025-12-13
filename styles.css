@@ -134,8 +134,8 @@ text-shadow: 0 0 5px #00ffaa;
 }
 
 #gameOverMessage {
-color: #ff4444;
-text-shadow: 0 0 10px red, 0 0 20px #ff5555;
+color: #55ff88;
+text-shadow: 0 0 10px green, 0 0 20px #55ff88;
 }
 
 #setSizeErrorMessage,
