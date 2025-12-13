@@ -5,32 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Darts Score Keeper</title>
 
+    <!-- CSS linkkaus -->
     <link rel="stylesheet" href="styles.css">
+
+    <!-- JS linkkaus -->
+    <script src="main.js" defer></script>
 </head>
 <body>
-    
+    <!-- Otsikko -->    
     <h1>Darts Score Keeper</h1>
 
+    <!-- Syöttökentät pelaajien nimille -->
     <label for="player1Name">Player 1:</label>
     <input id="player1Name" type="text">
 
     <label for="player2Name">Player 2:</label>
     <input id="player2Name" type="text">
 
+    <!-- Game type valikko, 301 tai 501 -->
     <label for="gameType">Select game type:</label>
     <select id="gameType">
         <option value="301">301</option>
         <option value="501" selected>501</option>
     </select>
 
+    <!-- Syöttökenttä setin koolle -->
     <label for="setSize">Enter set size:</label>
     <input id="setSize" type="number">
 
+    <!-- Start nappi -->
     <button id="startButton">Start game</button>
 
     <p id="setSizeErrorMessage"></p>
 
 
+    <!-- Pistetaulukko -->
     <div id="scoreboard">
         <div id="player1">
             <h2>Player 1:</h2>
@@ -42,25 +51,26 @@
             <p>Points: <span id="player2Points">0</span></p>
             <p>Legs won: <span id="player2Legs">0</span></p>
         </div>
+        <!-- Montako legiä vaaditaan voittoon -->
         <div id="winningLegsMessageContainer">
             <p id="winningLegsMessage"></p>
         </div>
     </div>
 
+    <!-- Syöttökenttä heiton pisteille -->
     <label for="scoreInput">Enter score for throw</label>
     <input id="scoreInput" type="number">
 
+    <!-- Submit nappi heiton pisteille -->
     <button id="submitScoreButton">Submit</button>
     <p id="scoreInputErrorMessage"></p>
 
+    <!-- Tekstit pelinkululle, heiton pisteet, legin loppuminen, pelin loppuminen -->
     <p id="scoreForThrowMessage"></p>
     <p id="turnMessage"></p>
     <p id ="legOverMessage"></p>
     <p id="gameOverMessage"></p>
 
-
-
-    <script src="main.js"></script>
 
 </body>
 </html>
